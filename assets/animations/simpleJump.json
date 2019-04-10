@@ -1,0 +1,377 @@
+{
+	"textures": [
+		{
+			"image": "simpleJump.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1506,
+				"h": 786
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Sb36umd-00.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-01.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 1,
+						"y": 263,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-02.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 252,
+						"y": 1,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-03.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 1,
+						"y": 525,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-04.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 252,
+						"y": 263,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-05.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 503,
+						"y": 1,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-06.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 252,
+						"y": 525,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-07.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 503,
+						"y": 263,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-08.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 754,
+						"y": 1,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-09.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 503,
+						"y": 525,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-10.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 754,
+						"y": 263,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-11.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 1005,
+						"y": 1,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-12.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 754,
+						"y": 525,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-13.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 1005,
+						"y": 263,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-14.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 1256,
+						"y": 1,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-15.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 1005,
+						"y": 525,
+						"w": 249,
+						"h": 260
+					}
+				},
+				{
+					"filename": "Sb36umd-16.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 249,
+						"h": 260
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 249,
+						"h": 260
+					},
+					"frame": {
+						"x": 1256,
+						"y": 263,
+						"w": 249,
+						"h": 260
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:1cb8d5fb51224994e75dab2ce3952d8b:c3a5376898af17e817a029c61148a27c:2877e3f9d8550a6cc468a956520aea9e$"
+	}
+}
