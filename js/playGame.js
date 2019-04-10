@@ -91,13 +91,10 @@ class playGame extends Phaser.Scene {
         var frameStart = this.anims.generateFrameNames('start');
         this.anims.create({ key: 'start', frames: frameStart, frameRate: 22, repeat:0 });
         this.player.anims.play('start');
-        
         var frameSimpleJump = this.anims.generateFrameNames('simpleJump');
         this.anims.create({ key: 'simpleJump', frames: frameSimpleJump, frameRate: 16 });
-        
         var frameJump = this.anims.generateFrameNames('jump');
         this.anims.create({ key: 'jump', frames: frameJump, frameRate: 11 });
-        
         var frameFall = this.anims.generateFrameNames('fall');
         this.anims.create({ key: 'fall', frames: frameFall, frameRate: 18 });
         
@@ -143,14 +140,6 @@ class playGame extends Phaser.Scene {
     
     addPlatform(platformWidth, posX){
         let platform;
-        /*if(this.platformPool.getLength()){
-            platform = this.platformPool.getFirst();
-            platform.x = posX;
-            platform.active = true;
-            platform.visible = true;
-            this.platformPool.remove(platform);
-        }
-        else{*/
             platform = this.physics.add.sprite(posX, game.config.height * 0.89, "platform");
             platform.setImmovable(true);
             platform.setVelocityX(gameOptions.platformStartSpeed * -1);
@@ -233,6 +222,7 @@ class playGame extends Phaser.Scene {
         var cam = this.cameras.main;
         cam.alpha = 0.5;
         this.player.destroy();
+        scoreText.destroy();
         theme.stop();
         gameoverMusic.play();
         this.scene.pause("PlayGame");
