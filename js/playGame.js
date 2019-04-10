@@ -29,6 +29,7 @@ var timerFall;
 var scoreText;
 var timedEvent;
 var isJumped = 0;
+var theme;
 
 
 class playGame extends Phaser.Scene {
@@ -44,8 +45,9 @@ class playGame extends Phaser.Scene {
         
         //audio
         jumpMusic = this.sound.add('jump');
-        gameoverMusic = this.sound.add('jump');
-        var theme = this.sound.add('theme');
+        gameoverMusic = this.sound.add('gameover');
+        theme = this.sound.add('theme');
+        gameoverMusic.stop();
         theme.play();
         
         //temps
@@ -196,17 +198,12 @@ class playGame extends Phaser.Scene {
             this.addPlatform(nextPlatformWidth, game.config.width + nextPlatformWidth / 2);
             this.addPoubelle(game.config.width + Phaser.Math.Between(gameOptions.platformSizeRange[0], gameOptions.platformSizeRange[1])/2);
         }
-        
-        // saut
-        /*if (keySpace.isDown && !fall) {
-            this.checkDoubleJump();
-        }*/
                 
     }
     
     jump() {
       this.player.body.velocity.y = -450;
-        console.log(isJumped);
+        jumpMusic.play();
         isJumped ++;
     }
     
@@ -228,26 +225,6 @@ class playGame extends Phaser.Scene {
         }
         this.time.addEvent({ delay: 500, callback: this.gameOver, callbackScope: this});
     }
-
-    
-    /*jump() {
-        if (this.player.body) {
-            if(this.player.body.touching.down) {
-                this.player.setVelocityY(gameOptions.jumpForce * -1);
-                jumpMusic.play();
-                    this.player.anims.play('simpleJump');
-            }
-            
-        }
-    }
-    
-    checkDoubleJump() {
-        if(this.jumpCount < 4) {
-            this.jump();
-            this.jumpCount++;
-        } 
-    }*/
-
     
     gameOver(bestScore) {
         gameOptions.counter = Math.floor(clock.now/100);
@@ -256,6 +233,8 @@ class playGame extends Phaser.Scene {
         var cam = this.cameras.main;
         cam.alpha = 0.5;
         this.player.destroy();
+        theme.stop();
+        gameoverMusic.play();
         this.scene.pause("PlayGame");
     }
     

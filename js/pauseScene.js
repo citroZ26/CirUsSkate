@@ -41,7 +41,7 @@ class pauseScene extends Phaser.Scene{
         button2.input.cursor = 'pointer';
 
         graphics.fillRectShape(rect);
-        //this.add.image(1134,375,'fin');
+        
         this.player = this.add.sprite(1200, 275,'wait-0');
         this.player.setScale(1.7);
         var frameWait = this.anims.generateFrameNames('wait');
