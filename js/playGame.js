@@ -125,6 +125,7 @@ class playGame extends Phaser.Scene {
                 this.scale.startFullscreen();
             }
         }, this);
+        button.input.cursor = 'pointer';
         
         isJumped = 0;
     }
@@ -210,7 +211,6 @@ class playGame extends Phaser.Scene {
     }
     
     checkDoubleJump() {
-        console.log('check saut');
       if (this.player.body.touching.down || (isJumped > 0 && isJumped < 2)) {
           if(this.player.body.touching.down) {
               isJumped = 0;
