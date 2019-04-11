@@ -28,7 +28,6 @@ class pauseScene extends Phaser.Scene{
             this.scene.start("PlayGame");
             this.scene.stop("pause");
         }, this);
-        button.input.cursor = 'pointer';
         
         var button2 = this.add.image(800-16, 16, 'fullscreen').setOrigin(-7,0).setInteractive();
         button2.on('pointerup', function () {
@@ -38,10 +37,9 @@ class pauseScene extends Phaser.Scene{
                 this.scale.startFullscreen();
             }
         }, this);
-        button2.input.cursor = 'pointer';
 
         graphics.fillRectShape(rect);
-        
+        //this.add.image(1134,375,'fin');
         this.player = this.add.sprite(1200, 275,'wait-0');
         this.player.setScale(1.7);
         var frameWait = this.anims.generateFrameNames('wait');
