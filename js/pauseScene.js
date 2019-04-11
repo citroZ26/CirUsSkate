@@ -30,6 +30,8 @@ class pauseScene extends Phaser.Scene{
             this.scene.stop("pause");
         }, this);
         
+        button.input.cursor = 'pointer';
+        
         var button2 = this.add.image(800-16, 16, 'fullscreen').setOrigin(-7,0).setInteractive();
         button2.on('pointerup', function () {
             if (this.scale.isFullscreen){
@@ -38,6 +40,8 @@ class pauseScene extends Phaser.Scene{
                 this.scale.startFullscreen();
             }
         }, this);
+        
+        button2.input.cursor = 'pointer';
 
         graphics.fillRectShape(rect);
         //this.add.image(1134,375,'fin');

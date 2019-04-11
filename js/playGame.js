@@ -131,6 +131,7 @@ class playGame extends Phaser.Scene {
                 this.scale.startFullscreen();
             }
         }, this);
+        button.input.cursor = 'pointer';
         
         isJumped = 0;
     }
