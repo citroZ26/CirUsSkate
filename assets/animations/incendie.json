@@ -1,0 +1,314 @@
+{
+	"textures": [
+		{
+			"image": "incendie.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1266,
+				"h": 249
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "incendie-06.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 76,
+						"y": 1,
+						"w": 140,
+						"h": 247
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 140,
+						"h": 247
+					}
+				},
+				{
+					"filename": "incendie-07.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 63,
+						"y": 5,
+						"w": 157,
+						"h": 234
+					},
+					"frame": {
+						"x": 143,
+						"y": 1,
+						"w": 157,
+						"h": 234
+					}
+				},
+				{
+					"filename": "incendie-08.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 63,
+						"y": 16,
+						"w": 163,
+						"h": 221
+					},
+					"frame": {
+						"x": 302,
+						"y": 1,
+						"w": 163,
+						"h": 221
+					}
+				},
+				{
+					"filename": "incendie-05.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 76,
+						"y": 47,
+						"w": 118,
+						"h": 190
+					},
+					"frame": {
+						"x": 653,
+						"y": 1,
+						"w": 118,
+						"h": 190
+					}
+				},
+				{
+					"filename": "incendie-13.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 74,
+						"y": 186,
+						"w": 142,
+						"h": 54
+					},
+					"frame": {
+						"x": 653,
+						"y": 193,
+						"w": 142,
+						"h": 54
+					}
+				},
+				{
+					"filename": "incendie-10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 59,
+						"y": 75,
+						"w": 185,
+						"h": 162
+					},
+					"frame": {
+						"x": 773,
+						"y": 1,
+						"w": 185,
+						"h": 162
+					}
+				},
+				{
+					"filename": "incendie-01.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 92,
+						"y": 154,
+						"w": 75,
+						"h": 83
+					},
+					"frame": {
+						"x": 797,
+						"y": 165,
+						"w": 75,
+						"h": 83
+					}
+				},
+				{
+					"filename": "incendie-00.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 91,
+						"y": 154,
+						"w": 74,
+						"h": 83
+					},
+					"frame": {
+						"x": 874,
+						"y": 165,
+						"w": 74,
+						"h": 83
+					}
+				},
+				{
+					"filename": "incendie-02.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 89,
+						"y": 154,
+						"w": 74,
+						"h": 83
+					},
+					"frame": {
+						"x": 950,
+						"y": 165,
+						"w": 74,
+						"h": 83
+					}
+				},
+				{
+					"filename": "incendie-04.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 82,
+						"y": 138,
+						"w": 86,
+						"h": 99
+					},
+					"frame": {
+						"x": 960,
+						"y": 1,
+						"w": 86,
+						"h": 99
+					}
+				},
+				{
+					"filename": "incendie-14.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 91,
+						"y": 186,
+						"w": 125,
+						"h": 51
+					},
+					"frame": {
+						"x": 960,
+						"y": 102,
+						"w": 125,
+						"h": 51
+					}
+				},
+				{
+					"filename": "incendie-11.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 59,
+						"y": 140,
+						"w": 185,
+						"h": 97
+					},
+					"frame": {
+						"x": 1048,
+						"y": 1,
+						"w": 185,
+						"h": 97
+					}
+				},
+				{
+					"filename": "incendie-03.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 91,
+						"y": 154,
+						"w": 74,
+						"h": 83
+					},
+					"frame": {
+						"x": 1026,
+						"y": 155,
+						"w": 74,
+						"h": 83
+					}
+				},
+				{
+					"filename": "incendie-12.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 256,
+						"h": 256
+					},
+					"spriteSourceSize": {
+						"x": 67,
+						"y": 169,
+						"w": 163,
+						"h": 68
+					},
+					"frame": {
+						"x": 1102,
+						"y": 100,
+						"w": 163,
+						"h": 68
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:81ef2f8e738a3dc7dbe0cc2cf889bf36:fad760497244fad8cd7ca6c658a61288:fb573b80926dc1ee34d89eb97cb6a3de$"
+	}
+}
