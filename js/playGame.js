@@ -14,21 +14,19 @@ var jumpMusic;
 var poubelle;
 var gameoverMusic;
 var buttonRestart;
-var aKey;
 var keySpace;
 var background;
 var jumpSprite;
-var animation;
 var button;
 var player;
 var playerStart;
 var clock;
-var spark;
 var fall = false;
 var timerFall;
 var scoreText;
 var timedEvent;
 var isJumped = 0;
+var theme;
 
 
 class playGame extends Phaser.Scene {
@@ -45,8 +43,8 @@ class playGame extends Phaser.Scene {
         
         //audio
         jumpMusic = this.sound.add('jump');
-        gameoverMusic = this.sound.add('jump');
-        var theme = this.sound.add('theme');
+        gameoverMusic = this.sound.add('gameover');
+        theme = this.sound.add('theme');
         theme.play();
         
         //temps
@@ -54,9 +52,7 @@ class playGame extends Phaser.Scene {
         clock.start();
         
         //background
-        var tabBackground = ['blueBackground', 'greenBackground','orangeBackground','originalBackground','purpleBackground'];
-        var aleaBackground = Math.round(Math.random() * Math.floor(tabBackground.length -1));
-        background = this.add.tileSprite(0,0,0,0,tabBackground[aleaBackground]).setOrigin(0,0);
+        background = this.add.tileSprite(0,0,0,0,'originalBackground').setOrigin(0,0);
 
         // groupe platforms
         this.platformGroup = this.add.group({
@@ -216,22 +212,16 @@ class playGame extends Phaser.Scene {
                 this.barriereGroup.killAndHide(barriere);
             }
         }, this);
-        
-        // saut
-        /*if (keySpace.isDown && !fall) {
-            this.checkDoubleJump();
-        }*/
                 
     }
     
     jump() {
       this.player.body.velocity.y = -450;
-        console.log(isJumped);
+        jumpMusic.play();
         isJumped ++;
     }
     
     checkDoubleJump() {
-        console.log('check saut');
       if (this.player.body.touching.down || (isJumped > 0 && isJumped < 2)) {
           if(this.player.body.touching.down) {
               isJumped = 0;
@@ -278,23 +268,6 @@ class playGame extends Phaser.Scene {
     }
 
     
-    /*jump() {
-        if (this.player.body) {
-            if(this.player.body.touching.down) {
-                this.player.setVelocityY(gameOptions.jumpForce * -1);
-                jumpMusic.play();
-                    this.player.anims.play('simpleJump');
-            }
-            
-        }
-    }
-    
-    checkDoubleJump() {
-        if(this.jumpCount < 4) {
-            this.jump();
-            this.jumpCount++;
-        } 
-    }*/
 
     
     gameOver(bestScore) {
@@ -304,6 +277,9 @@ class playGame extends Phaser.Scene {
         var cam = this.cameras.main;
         cam.alpha = 0.5;
         this.player.destroy();
+        scoreText.visible = false;
+        theme.stop();
+        gameoverMusic.play();
         this.scene.pause("PlayGame");
     }
     

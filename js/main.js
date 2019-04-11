@@ -1,8 +1,7 @@
 let game;
 
 window.onload = function() {
-
-    // object containing configuration options
+    
     let gameConfig = {
         type: Phaser.AUTO,
         width: 1334,
@@ -21,13 +20,10 @@ window.onload = function() {
                 start: true
             }]
         },
-
-        // physics settings
         physics: {
             default: "arcade",
             arcade: {
                 debug: true,
-                //gravity: { y: 900 }
             }
         }
         

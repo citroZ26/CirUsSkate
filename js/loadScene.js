@@ -1,5 +1,5 @@
 var background;
-class loadScene extends Phaser.Scene{
+class loadScene extends Phaser.Scene {
     constructor(){
         super("load");
     }
