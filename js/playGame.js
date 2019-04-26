@@ -40,7 +40,7 @@ class playGame extends Phaser.Scene {
     
     create(){
         gameOptions.counter = 0; // Score à 0
-        gameOptions.platformStartSpeed = 1000;
+        gameOptions.platformStartSpeed = 200;
         fall = false;
         
         //audio
@@ -54,9 +54,9 @@ class playGame extends Phaser.Scene {
         clock.start();
         
         //background
-        var tabBackground = ['blueBackground', 'greenBackground','orangeBackground','originalBackground','purpleBackground'];
+        /*var tabBackground = ['blueBackground', 'greenBackground','orangeBackground','originalBackground','purpleBackground'];
         var aleaBackground = Math.round(Math.random() * Math.floor(tabBackground.length -1));
-        background = this.add.tileSprite(0,0,0,0,tabBackground[aleaBackground]).setOrigin(0,0);
+        background = this.add.tileSprite(0,0,0,0,tabBackground[aleaBackground]).setOrigin(0,0);*/
         
         //background = this.add.tileSprite(0,0,0,0,'blueBackground').setOrigin(0,0);
 
@@ -179,7 +179,7 @@ class playGame extends Phaser.Scene {
     
     update(){
         // vitesse fond
-        background.tilePositionX += 1;
+        //background.tilePositionX += 1;
         
         // score
         gameOptions.counter = (Math.floor(clock.now/100) / 10);

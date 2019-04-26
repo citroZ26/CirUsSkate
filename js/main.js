@@ -13,7 +13,7 @@ window.onload = function() {
             playGame,
             pauseScene            
         ],
-        backgroundColor: 0x444444,
+        backgroundColor: 0x059AF4,
         
         plugins: {
             global: [{
