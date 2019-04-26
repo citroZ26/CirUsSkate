@@ -14,19 +14,21 @@ var jumpMusic;
 var poubelle;
 var gameoverMusic;
 var buttonRestart;
+var aKey;
 var keySpace;
 var background;
 var jumpSprite;
+var animation;
 var button;
 var player;
 var playerStart;
 var clock;
+var spark;
 var fall = false;
 var timerFall;
 var scoreText;
 var timedEvent;
 var isJumped = 0;
-var theme;
 
 
 class playGame extends Phaser.Scene {
@@ -43,8 +45,8 @@ class playGame extends Phaser.Scene {
         
         //audio
         jumpMusic = this.sound.add('jump');
-        gameoverMusic = this.sound.add('gameover');
-        theme = this.sound.add('theme');
+        gameoverMusic = this.sound.add('jump');
+        var theme = this.sound.add('theme');
         theme.play();
         
         //temps
@@ -52,7 +54,11 @@ class playGame extends Phaser.Scene {
         clock.start();
         
         //background
-        background = this.add.tileSprite(0,0,0,0,'originalBackground').setOrigin(0,0);
+        var tabBackground = ['blueBackground', 'greenBackground','orangeBackground','originalBackground','purpleBackground'];
+        var aleaBackground = Math.round(Math.random() * Math.floor(tabBackground.length -1));
+        background = this.add.tileSprite(0,0,0,0,tabBackground[aleaBackground]).setOrigin(0,0);
+        
+        //background = this.add.tileSprite(0,0,0,0,'blueBackground').setOrigin(0,0);
 
         // groupe platforms
         this.platformGroup = this.add.group({
@@ -84,6 +90,7 @@ class playGame extends Phaser.Scene {
 
         // Ajout du joueur
         this.player = this.physics.add.sprite(gameOptions.playerStartPosition, game.config.height / 2, 'player');
+        //this.player.anims.play('start');
         this.player.setGravityY(gameOptions.playerGravity);
         this.player.setDepth(2);
         this.player.setSize(70,240, false).setOffset(60,0);
@@ -91,7 +98,10 @@ class playGame extends Phaser.Scene {
         //animations
         var frameStart = this.anims.generateFrameNames('start');
         this.anims.create({ key: 'start', frames: frameStart, frameRate: 22, repeat:0 });
-        this.player.anims.play('start');
+        
+        var frameSkate = this.anims.generateFrameNames('skate');
+        this.anims.create({ key: 'skate', frames: frameSkate, frameRate: 22, repeat:-1 });
+        this.player.anims.play('skate');
         
         var frameSimpleJump = this.anims.generateFrameNames('simpleJump');
         this.anims.create({ key: 'simpleJump', frames: frameSimpleJump, frameRate: 16 });
@@ -109,7 +119,7 @@ class playGame extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platformGroup);
         this.physics.add.collider(this.platformGroup, this.poubelleGroup);
         this.physics.add.collider(this.platformGroup, this.barriereGroup);
-        this.physics.add.collider(this.barriereGroup, this.player);
+        this.physics.add.collider(this.player, this.barriereGroup, this.fall,null,this);
         this.physics.add.collider(this.player, this.poubelleGroup, this.fall,null,this);
 
         // touche espace
@@ -131,7 +141,6 @@ class playGame extends Phaser.Scene {
                 this.scale.startFullscreen();
             }
         }, this);
-        button.input.cursor = 'pointer';
         
         isJumped = 0;
     }
@@ -157,7 +166,7 @@ class playGame extends Phaser.Scene {
         
     addPlatform(platformWidth, posX){
         let platform;
-        gameOptions.platformStartSpeed += 5;
+        gameOptions.platformStartSpeed += 10;
         platform = this.physics.add.sprite(posX, game.config.height * 0.89, "platform");
         platform.setVelocityX(gameOptions.platformStartSpeed * -1);
         platform.setImmovable(true);
@@ -213,16 +222,22 @@ class playGame extends Phaser.Scene {
                 this.barriereGroup.killAndHide(barriere);
             }
         }, this);
+        
+        // saut
+        /*if (keySpace.isDown && !fall) {
+            this.checkDoubleJump();
+        }*/
                 
     }
     
     jump() {
       this.player.body.velocity.y = -450;
-        jumpMusic.play();
+        console.log(isJumped);
         isJumped ++;
     }
     
     checkDoubleJump() {
+        console.log('check saut');
       if (this.player.body.touching.down || (isJumped > 0 && isJumped < 2)) {
           if(this.player.body.touching.down) {
               isJumped = 0;
@@ -241,12 +256,12 @@ class playGame extends Phaser.Scene {
     
     
     fall(player, poubelle) {
-        if(!fall) {
+        if(!fall && this.player.y > 425) {
             fall = true;
             poubelle.setVelocityX(-800);
             player.anims.play('fall'); 
+            this.time.addEvent({ delay: 500, callback: this.gameOver, callbackScope: this});
         }
-        this.time.addEvent({ delay: 500, callback: this.gameOver, callbackScope: this});
     }
     
     posPoubelle(nextPlatformWidth) {
@@ -269,6 +284,23 @@ class playGame extends Phaser.Scene {
     }
 
     
+    /*jump() {
+        if (this.player.body) {
+            if(this.player.body.touching.down) {
+                this.player.setVelocityY(gameOptions.jumpForce * -1);
+                jumpMusic.play();
+                    this.player.anims.play('simpleJump');
+            }
+            
+        }
+    }
+    
+    checkDoubleJump() {
+        if(this.jumpCount < 4) {
+            this.jump();
+            this.jumpCount++;
+        } 
+    }*/
 
     
     gameOver(bestScore) {
@@ -278,9 +310,6 @@ class playGame extends Phaser.Scene {
         var cam = this.cameras.main;
         cam.alpha = 0.5;
         this.player.destroy();
-        scoreText.visible = false;
-        theme.stop();
-        gameoverMusic.play();
         this.scene.pause("PlayGame");
     }
     

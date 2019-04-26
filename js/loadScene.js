@@ -1,5 +1,5 @@
 var background;
-class loadScene extends Phaser.Scene {
+class loadScene extends Phaser.Scene{
     constructor(){
         super("load");
     }
@@ -11,14 +11,20 @@ class loadScene extends Phaser.Scene {
         this.load.multiatlas('fall', './assets/animations/fall.json', './assets/animations');
         this.load.multiatlas('wait', './assets/animations/wait.json', './assets/animations');
         this.load.multiatlas('spark', './assets/animations/spark.json', './assets/animations');
+        //this.load.multiatlas('incendie', './assets/animations/incendie.json', './assets/animations');
 
         
         this.load.image('player','./assets/images/skate_frames/skate_frames-0.png');
         this.load.image('wait-0','./assets/images/spark-0.png');
+        this.load.image('incendie-0','./assets/images/incendie-0.png');
 
         
         this.load.image("platform", "./assets/images/test.png");
         this.load.image("blueBackground", "./assets/images/blueBackground.png");
+        this.load.image('block', './assets/images/block.png');
+        this.load.image('rub', './assets/images/rub.png');
+        this.load.image('end', './assets/images/end.png');
+        this.load.bitmapFont('arcade', './assets/fonts/arcade.png', './assets/fonts/arcade.xml');
         this.load.image("greenBackground", "./assets/images/greenBackground.png");
         this.load.image("orangeBackground", "./assets/images/orangeBackground.png");
         this.load.image("originalBackground", "./assets/images/originalBackground.png");
@@ -47,6 +53,7 @@ class loadScene extends Phaser.Scene {
             loadingText.destroy();
             percentText.destroy();
             //console.log(this.scene);
+            //this.scene.scene.start('TitleScene');
             this.scene.scene.start('PlayGame');
         });
 
