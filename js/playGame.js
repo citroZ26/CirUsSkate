@@ -131,7 +131,7 @@ class playGame extends Phaser.Scene {
         });
 
         //plein écran
-        button = this.add.image(800-16, 16, 'fullscreen').setOrigin(-7,0).setInteractive();
+        button = this.add.image(800-16, 16, 'fullscreen').setOrigin(-7,0).setInteractive({useHandCursor: true});
         button.visible = true;
         button.on('pointerup', function () {
             if (this.scale.isFullscreen){

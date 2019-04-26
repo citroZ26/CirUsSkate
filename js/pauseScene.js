@@ -21,7 +21,7 @@ class pauseScene extends Phaser.Scene{
         if(score > 28) {bestScore = score;}
         this.add.text(150, 200, 'Best score : ' + bestScore + ' m' , { font: '75px', fill: 'white', color: 'black', align: 'left' });
         
-        button = this.add.image(667,575,'buttonRestart').setInteractive();
+        button = this.add.image(667,575,'buttonRestart').setInteractive({useHandCursor: true});
         button.visible = true;
         button.on('pointerup', function () {
             this.scene.stop("PlayGame");
@@ -29,7 +29,7 @@ class pauseScene extends Phaser.Scene{
             this.scene.stop("pause");
         }, this);
         
-        var button2 = this.add.image(800-16, 16, 'fullscreen').setOrigin(-7,0).setInteractive();
+        var button2 = this.add.image(800-16, 16, 'fullscreen').setOrigin(-7,0).setInteractive({useHandCursor: true});
         button2.on('pointerup', function () {
             if (this.scale.isFullscreen){
                 this.scale.stopFullscreen();
