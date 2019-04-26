@@ -2,7 +2,7 @@ let gameOptions = {
     platformStartSpeed: 350,
     spawnRange: [250, 500],
     platformSizeRange: [800, 4000],
-    playerGravity: 900,
+    playerGravity: 1100,
     jumpForce: 500,
     playerStartPosition: 200,
     jumps: 1,
@@ -40,7 +40,7 @@ class playGame extends Phaser.Scene {
     
     create(){
         gameOptions.counter = 0; // Score à 0
-        gameOptions.platformStartSpeed = 350;
+        gameOptions.platformStartSpeed = 1000;
         fall = false;
         
         //audio
@@ -310,6 +310,7 @@ class playGame extends Phaser.Scene {
         var cam = this.cameras.main;
         cam.alpha = 0.5;
         this.player.destroy();
+        scoreText.visible = false;
         this.scene.pause("PlayGame");
     }
     
