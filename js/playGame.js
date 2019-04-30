@@ -28,7 +28,7 @@ let gameOptions = {
     jumps: 1,
     counter: 0,
     bestScore: 37
-};
+}
 
 var jumpMusic;
 var poubelle;
@@ -110,7 +110,6 @@ class playGame extends Phaser.Scene {
 
         // Ajout du joueur
         this.player = this.physics.add.sprite(gameOptions.playerStartPosition, game.config.height / 2, 'player');
-        //this.player.anims.play('start');
         this.player.setGravityY(gameOptions.playerGravity);
         this.player.setDepth(2);
         this.player.setSize(70,240, false).setOffset(60,0);
@@ -118,6 +117,7 @@ class playGame extends Phaser.Scene {
         //animations
         var frameStart = this.anims.generateFrameNames('start');
         this.anims.create({ key: 'start', frames: frameStart, frameRate: 22, repeat:0 });
+        this.player.anims.play('start');
         
         var frameSkate = this.anims.generateFrameNames('skate');
         this.anims.create({ key: 'skate', frames: frameSkate, frameRate: 22, repeat:-1 });
