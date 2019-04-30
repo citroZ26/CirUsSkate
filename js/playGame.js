@@ -29,6 +29,7 @@ var timerFall;
 var scoreText;
 var timedEvent;
 var isJumped = 0;
+var whatJump;
 
 
 class playGame extends Phaser.Scene {
@@ -52,12 +53,12 @@ class playGame extends Phaser.Scene {
         //temps
         clock = this.plugins.get('rexClock').add(this, {});
         clock.start();
-        
+
         //background
         /*var tabBackground = ['blueBackground', 'greenBackground','orangeBackground','originalBackground','purpleBackground'];
         var aleaBackground = Math.round(Math.random() * Math.floor(tabBackground.length -1));
         background = this.add.tileSprite(0,0,0,0,tabBackground[aleaBackground]).setOrigin(0,0);*/
-        
+
         //background = this.add.tileSprite(0,0,0,0,'blueBackground').setOrigin(0,0);
 
         // groupe platforms
@@ -75,14 +76,10 @@ class playGame extends Phaser.Scene {
         });
         
         // groupe poubelles
-        this.poubelleGroup = this.add.group({
-            
-        });
+        this.poubelleGroup = this.add.group({});
         
         // groupe barrieres
-        this.barriereGroup = this.add.group({
-            
-        });
+        this.barriereGroup = this.add.group({});
 
 
         // ajouter une platform
@@ -141,8 +138,6 @@ class playGame extends Phaser.Scene {
                 this.scale.startFullscreen();
             }
         }, this);
-        
-        isJumped = 0;
     }
     
     addPoubelle(posX) {
@@ -222,22 +217,15 @@ class playGame extends Phaser.Scene {
                 this.barriereGroup.killAndHide(barriere);
             }
         }, this);
-        
-        // saut
-        /*if (keySpace.isDown && !fall) {
-            this.checkDoubleJump();
-        }*/
                 
     }
     
     jump() {
-      this.player.body.velocity.y = -450;
-        console.log(isJumped);
+        this.player.body.velocity.y = -450;
         isJumped ++;
     }
     
     checkDoubleJump() {
-        console.log('check saut');
       if (this.player.body.touching.down || (isJumped > 0 && isJumped < 2)) {
           if(this.player.body.touching.down) {
               isJumped = 0;
@@ -283,24 +271,6 @@ class playGame extends Phaser.Scene {
         this.addPoubelle(game.config.width + poubelle2);
     }
 
-    
-    /*jump() {
-        if (this.player.body) {
-            if(this.player.body.touching.down) {
-                this.player.setVelocityY(gameOptions.jumpForce * -1);
-                jumpMusic.play();
-                    this.player.anims.play('simpleJump');
-            }
-            
-        }
-    }
-    
-    checkDoubleJump() {
-        if(this.jumpCount < 4) {
-            this.jump();
-            this.jumpCount++;
-        } 
-    }*/
 
     
     gameOver(bestScore) {
