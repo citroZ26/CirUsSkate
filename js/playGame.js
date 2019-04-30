@@ -30,7 +30,8 @@ let gameOptions = {
     jumpForce: 500,
     jumps: 1,
     counter: 0,
-    bestScore: 37
+    bestScore: 37,
+    nbrCoin: 0
 }
 
 var jumpMusic;
@@ -52,7 +53,7 @@ var timerFall;
 var scoreText;
 var timedEvent;
 var isJumped = 0;
-var nbrCoin = 0;
+
 
 
 class playGame extends Phaser.Scene {
@@ -64,6 +65,7 @@ class playGame extends Phaser.Scene {
 
     create() {
         gameOptions.counter = 0; // Score à 0
+        gameOptions.nbrCoin = 0;
         gameOptions.platformStartSpeed = 200;
         fall = false;
 
@@ -81,11 +83,7 @@ class playGame extends Phaser.Scene {
         clock.start();
 
         //background
-        /*var tabBackground = ['blueBackground', 'greenBackground','orangeBackground','originalBackground','purpleBackground'];
-        var aleaBackground = Math.round(Math.random() * Math.floor(tabBackground.length -1));
-        background = this.add.tileSprite(0,0,0,0,tabBackground[aleaBackground]).setOrigin(0,0);*/
-
-        //background = this.add.tileSprite(0,0,0,0,'blueBackground').setOrigin(0,0);
+        background = this.add.tileSprite(0,0,0,0,'blueBackground').setOrigin(0,0);
 
         // groupe platforms
         this.platformGroup = this.add.group({
@@ -173,17 +171,17 @@ class playGame extends Phaser.Scene {
         this.physics.add.collider(this.player, this.poubelleGroup, this.fall, null, this);
         // setting collisions between the player and the coin group
         this.physics.add.overlap(this.player, this.coinGroup, function(player, coin){
+            ++gameOptions.nbrCoin;
             this.tweens.add({
-                targets: coin,
-                y: coin.y - 100,
-                alpha: 0,
-                duration: 800,
-                ease: "Cubic.easeOut",
-                callbackScope: this,
-                onComplete: function(){
+            targets: coin,
+            y: coin.y - 100,
+            alpha: 0,
+            duration: 800,
+            ease: "Cubic.easeOut",
+            callbackScope: this,
+            onComplete: function(){
                     this.coinGroup.killAndHide(coin);
                     this.coinGroup.remove(coin);
-                    ++nbrCoin;
                 }
             });
         }, null, this);
@@ -274,13 +272,14 @@ class playGame extends Phaser.Scene {
 
     update() {
         // vitesse fond
-        //background.tilePositionX += 1;
+        background.tilePositionX += 2;
 
-        console.log(nbrCoin/26);
+        console.log(gameOptions.nbrCoin/26);
 
         // score
         gameOptions.counter = (Math.floor(clock.now / 100) / 10);
-        scoreText.setText(gameOptions.counter + ' m');
+        //scoreText.setText(gameOptions.counter + ' m');
+        scoreText.setText(Phaser.Math.Snap.To(gameOptions.nbrCoin/26, 1));
 
         // mort
         if (this.player.y > game.config.height) {

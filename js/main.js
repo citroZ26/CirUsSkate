@@ -13,7 +13,7 @@ window.onload = function() {
             playGame,
             pauseScene            
         ],
-        backgroundColor: 0x059AF4,
+        backgroundColor: 0xFFFFFF,
         
         plugins: {
             global: [{
@@ -27,7 +27,7 @@ window.onload = function() {
         physics: {
             default: "arcade",
             arcade: {
-                debug: true,
+                //debug: true,
                 //gravity: { y: 900 }
             }
         }
