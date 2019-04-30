@@ -11,7 +11,6 @@ class loadScene extends Phaser.Scene{
         this.load.multiatlas('fall', './assets/animations/fall.json', './assets/animations');
         this.load.multiatlas('wait', './assets/animations/wait.json', './assets/animations');
         this.load.multiatlas('spark', './assets/animations/spark.json', './assets/animations');
-        //this.load.multiatlas('incendie', './assets/animations/incendie.json', './assets/animations');
 
         
         this.load.image('player','./assets/images/skate_frames/skate_frames-0.png');
@@ -20,6 +19,7 @@ class loadScene extends Phaser.Scene{
 
         
         this.load.image("platform", "./assets/images/test.png");
+        this.load.image("coin", "./assets/images/skate.png");
         this.load.image("blueBackground", "./assets/images/blueBackground.png");
         this.load.image('block', './assets/images/block.png');
         this.load.image('rub', './assets/images/rub.png');

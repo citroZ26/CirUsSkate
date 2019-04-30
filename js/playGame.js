@@ -22,6 +22,9 @@ let gameOptions = {
     // hauteur maximale et minimale de la plate-forme, en tant que rapport de hauteur d'écran
     platformVerticalLimit: [0.95, 0.95],
 
+    // % of probability a coin appears on the platform
+    coinPercent: 75,
+
     playerStartPosition: 200,
     playerGravity: 900,
     jumpForce: 500,
@@ -49,6 +52,7 @@ var timerFall;
 var scoreText;
 var timedEvent;
 var isJumped = 0;
+var nbrCoin = 0;
 
 
 class playGame extends Phaser.Scene {
@@ -103,6 +107,24 @@ class playGame extends Phaser.Scene {
         // groupe barrieres
         this.barriereGroup = this.add.group({});
 
+        // group with all active coins.
+        this.coinGroup = this.add.group({
+
+            // once a coin is removed, it's added to the pool
+            removeCallback: function(coin){
+                coin.scene.coinPool.add(coin)
+            }
+        });
+
+        // coin pool
+        this.coinPool = this.add.group({
+
+            // once a coin is removed from the pool, it's added to the active coins group
+            removeCallback: function(coin){
+                coin.scene.coinGroup.add(coin)
+            }
+        });
+
 
         // ajouter une platform
         this.addPlatform(game.config.width, game.config.width / 2, game.config.height * gameOptions.platformVerticalLimit[1]);
@@ -149,6 +171,22 @@ class playGame extends Phaser.Scene {
         this.physics.add.collider(this.platformGroup, this.barriereGroup);
         this.physics.add.collider(this.player, this.barriereGroup, this.fall, null, this);
         this.physics.add.collider(this.player, this.poubelleGroup, this.fall, null, this);
+        // setting collisions between the player and the coin group
+        this.physics.add.overlap(this.player, this.coinGroup, function(player, coin){
+            this.tweens.add({
+                targets: coin,
+                y: coin.y - 100,
+                alpha: 0,
+                duration: 800,
+                ease: "Cubic.easeOut",
+                callbackScope: this,
+                onComplete: function(){
+                    this.coinGroup.killAndHide(coin);
+                    this.coinGroup.remove(coin);
+                    ++nbrCoin;
+                }
+            });
+        }, null, this);
 
         // touche espace
         keySpace = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -210,12 +248,35 @@ class playGame extends Phaser.Scene {
             this.platformGroup.add(platform);
         }
         this.nextPlatformDistance = Phaser.Math.Between(gameOptions.spawnRange[0], gameOptions.spawnRange[1]);
+
+        // is there a coin over the platform?
+        if(this.addedPlatforms > 1){
+            if(Phaser.Math.Between(1, 100) <= gameOptions.coinPercent){
+                if(this.coinPool.getLength()){
+                    let coin = this.coinPool.getFirst();
+                    coin.x = posX;
+                    coin.y = posY - 96;
+                    coin.alpha = 1;
+                    coin.active = true;
+                    coin.visible = true;
+                    this.coinPool.remove(coin);
+                }
+                else{
+                    let coin = this.physics.add.sprite(posX, posY - 96, "coin");
+                    coin.setImmovable(true);
+                    coin.setVelocityX(platform.body.velocity.x);
+                    this.coinGroup.add(coin);
+                }
+            }
+        }
     }
 
 
     update() {
         // vitesse fond
         //background.tilePositionX += 1;
+
+        console.log(nbrCoin/26);
 
         // score
         gameOptions.counter = (Math.floor(clock.now / 100) / 10);
@@ -241,6 +302,14 @@ class playGame extends Phaser.Scene {
             if (platform.x < -platform.displayWidth / 2) {
                 this.platformGroup.killAndHide(platform);
                 this.platformGroup.remove(platform);
+            }
+        }, this);
+
+        // recycling coins
+        this.coinGroup.getChildren().forEach(function(coin){
+            if(coin.x < - coin.displayWidth / 2){
+                this.coinGroup.killAndHide(coin);
+                this.coinGroup.remove(coin);
             }
         }, this);
 
