@@ -149,15 +149,30 @@ class playGame extends Phaser.Scene {
 
         var frameFall = this.anims.generateFrameNames('fall');
         this.anims.create({key: 'fall', frames: frameFall, frameRate: 18});
-
+        
+        var rect = new Phaser.Geom.Rectangle(game.config.width / 2 - 100, 0, 200, 75);
+        var graphics = this.add.graphics({ fillStyle: { color: 0x666666, alpha: 0.8 } });
+        graphics.fillRectShape(rect);
         //score en jeux
-        scoreText = this.add.text(100, 100, '0 m', {
-            font: '75px',
-            fill: 'white',
-            color: 'white',
-            align: 'left',
+        var xText = this.add.text(game.config.width / 2 - 15, 20, 'x', {
+            font: '50px',
+            fill: 'yellow',
+            color: 'yellow',
+            align: 'center',
             alpha: 1
         });
+        scoreText = this.add.text(game.config.width / 2 + 30, 0, 'X', {
+            font: '80px',
+            fill: 'yellow',
+            color: 'yellow',
+            align: 'center',
+            alpha: 1
+        });
+        scoreText.setStroke("red", 8);
+        xText.setStroke("red", 8);
+        var skate = this.add.image(game.config.width / 2 - 50,40,"coin");
+        skate.rotation = 5.7;
+        skate.setDisplaySize(100, 100);
 
         // Collisions
         this.physics.add.collider(this.player, this.platformGroup, function () {
