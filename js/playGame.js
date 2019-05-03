@@ -20,7 +20,7 @@ let gameOptions = {
     platformHeighScale: 100,
 
     // hauteur maximale et minimale de la plate-forme, en tant que rapport de hauteur d'écran
-    platformVerticalLimit: [0.95, 0.95],
+    platformVerticalLimit: [0.7, 0.8],
 
     // % of probability a coin appears on the platform
     coinPercent: 75,
@@ -53,6 +53,9 @@ var timerFall;
 var scoreText;
 var timedEvent;
 var isJumped = 0;
+var skate;
+var xText;
+var graphics;
 
 
 
@@ -151,10 +154,10 @@ class playGame extends Phaser.Scene {
         this.anims.create({key: 'fall', frames: frameFall, frameRate: 18});
         
         var rect = new Phaser.Geom.Rectangle(game.config.width / 2 - 100, 0, 200, 75);
-        var graphics = this.add.graphics({ fillStyle: { color: 0x666666, alpha: 0.8 } });
+        graphics = this.add.graphics({ fillStyle: { color: 0x666666, alpha: 0.8 } });
         graphics.fillRectShape(rect);
         //score en jeux
-        var xText = this.add.text(game.config.width / 2 - 15, 20, 'x', {
+        xText = this.add.text(game.config.width / 2 - 15, 20, 'x', {
             font: '50px',
             fill: 'yellow',
             color: 'yellow',
@@ -170,7 +173,7 @@ class playGame extends Phaser.Scene {
         });
         scoreText.setStroke("red", 8);
         xText.setStroke("red", 8);
-        var skate = this.add.image(game.config.width / 2 - 50,40,"coin");
+        skate = this.add.image(game.config.width / 2 - 50,40,"coin");
         skate.rotation = 5.7;
         skate.setDisplaySize(100, 100);
 
@@ -411,6 +414,9 @@ class playGame extends Phaser.Scene {
         cam.alpha = 0.5;
         this.player.destroy();
         scoreText.visible = false;
+        skate.visible = false;
+        xText.visible = false;
+        graphics.visible = false;
         this.scene.pause("PlayGame");
     }
 
