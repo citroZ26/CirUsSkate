@@ -52,6 +52,7 @@ var skate;
 var xText;
 var graphics;
 var theme;
+var coinSound;
 
 
 
@@ -75,6 +76,7 @@ class playGame extends Phaser.Scene {
         jumpMusic = this.sound.add('jump');
         gameoverMusic = this.sound.add('gameover');
         theme = this.sound.add('theme');
+        coinSound = this.sound.add('coinSound');
         theme.play();
 
         //temps
@@ -180,8 +182,6 @@ class playGame extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platformGroup, function () {
             if (!this.player.anims.isPlaying) {
                 this.player.anims.play("skate");
-                //this.player.anims.play('spark');
-                console.log('spark');
             }
         }, null, this);
         this.physics.add.collider(this.platformGroup, this.poubelleGroup);
@@ -191,6 +191,7 @@ class playGame extends Phaser.Scene {
         // setting collisions between the player and the coin group
         this.physics.add.overlap(this.player, this.coinGroup, function(player, coin){
             ++gameOptions.nbrCoin;
+            coinSound.play();
             this.tweens.add({
             targets: coin,
             y: coin.y - 100,
