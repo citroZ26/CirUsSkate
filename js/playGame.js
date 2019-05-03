@@ -4,14 +4,14 @@ let gameOptions = {
 
     // spawn range, à quelle distance doit être la plate-forme la plus à droite du bord droit
     // before next platform spawns, in pixels
-    spawnRange: [80, 300],
+    spawnRange: [300, 900],
 
     // plage de spawn, how far should be the rightmost platform from the right edge
     // avant que la prochaine plateform apparaisse, en pixels
     platformStartSpeed: 350,
 
     // largeur de la plate-forme, en pixels
-    platformSizeRange: [688, 688],
+    platformSizeRange: [688, 1500],
 
     // une plage haute entre la plateforme la plus à droite et la prochaine plateforme à engendrer
     platformHeightRange: [-5, 5],
@@ -69,7 +69,7 @@ class playGame extends Phaser.Scene {
     create() {
         gameOptions.counter = 0; // Score à 0
         gameOptions.nbrCoin = 0;
-        gameOptions.platformStartSpeed = 200;
+        gameOptions.platformStartSpeed = 500;
         fall = false;
 
         // keeping track of added platforms
@@ -185,7 +185,7 @@ class playGame extends Phaser.Scene {
         }, null, this);
         this.physics.add.collider(this.platformGroup, this.poubelleGroup);
         this.physics.add.collider(this.platformGroup, this.barriereGroup);
-        this.physics.add.collider(this.player, this.barriereGroup, this.fall, null, this);
+        this.physics.add.collider(this.player, this.barriereGroup, this.fall2, null, this);
         this.physics.add.collider(this.player, this.poubelleGroup, this.fall, null, this);
         // setting collisions between the player and the coin group
         this.physics.add.overlap(this.player, this.coinGroup, function(player, coin){
@@ -224,18 +224,18 @@ class playGame extends Phaser.Scene {
         }, this);
     }
 
-    addPoubelle(posX) {
+    addPoubelle(posX, posY) {
         let poubelle;
-        poubelle = this.physics.add.sprite(posX, game.config.height * 0.7, "poubelle");
+        poubelle = this.physics.add.sprite(posX, posY, "poubelle");
         poubelle.setVelocityX((gameOptions.platformStartSpeed * -1));
-        poubelle.setVelocityY(900);
-        poubelle.setScale(.3);
+       // poubelle.setVelocityY(900);
+        poubelle.setScale(0.3);
         this.poubelleGroup.add(poubelle);
     }
 
-    addBarriere(barriereWidth, posX) {
+    addBarriere(barriereWidth, posX, posY) {
         let barriere;
-        barriere = this.physics.add.sprite(posX, game.config.height * 0.767, "barriere").setOrigin(0, 0.5);
+        barriere = this.physics.add.sprite(posX, posY, "barriere").setOrigin(0, 0.5);
         barriere.setVelocityX((gameOptions.platformStartSpeed * -1));
         barriere.displayWidth = barriereWidth;
         barriere.displayHeight = 95;
@@ -245,6 +245,7 @@ class playGame extends Phaser.Scene {
 
     addPlatform(platformWidth, posX, posY) {
         this.addedPlatforms++;
+        gameOptions.platformStartSpeed += 2;
         let platform;
         if (this.platformPool.getLength()) {
             platform = this.platformPool.getFirst();
@@ -260,7 +261,7 @@ class playGame extends Phaser.Scene {
             platform = this.add.tileSprite(posX, posY, platformWidth, 110, "platform");
             this.physics.add.existing(platform);
             platform.body.setImmovable(true);
-            platform.body.setVelocityX(Phaser.Math.Between(gameOptions.platformSpeedRange[0], gameOptions.platformSpeedRange[1]) * -1);
+            platform.body.setVelocityX(gameOptions.platformStartSpeed * -1);
             this.platformGroup.add(platform);
         }
         this.nextPlatformDistance = Phaser.Math.Between(gameOptions.spawnRange[0], gameOptions.spawnRange[1]);
@@ -291,8 +292,6 @@ class playGame extends Phaser.Scene {
     update() {
         // vitesse fond
         background.tilePositionX += 2;
-
-        console.log(gameOptions.nbrCoin/26);
 
         // score
         gameOptions.counter = (Math.floor(clock.now / 100) / 10);
@@ -339,6 +338,8 @@ class playGame extends Phaser.Scene {
             let maxPlatformHeight = game.config.height * gameOptions.platformVerticalLimit[1];
             let nextPlatformHeight = Phaser.Math.Clamp(nextPlatformGap, minPlatformHeight, maxPlatformHeight);
             this.addPlatform(nextPlatformWidth, game.config.width + nextPlatformWidth / 2, nextPlatformHeight);
+            this.posPoubelle(nextPlatformWidth, nextPlatformHeight);
+            this.posBarriere(nextPlatformWidth, nextPlatformHeight);
         }
 
         this.poubelleGroup.getChildren().forEach(function (poubelle) {
@@ -348,7 +349,7 @@ class playGame extends Phaser.Scene {
         }, this);
 
         this.barriereGroup.getChildren().forEach(function (barriere) {
-            if (barriere.x < -nextPlatformWidth / 3) {
+            if (barriere.x < -this.nextPlatformWidth / 3) {
                 this.barriereGroup.killAndHide(barriere);
             }
         }, this);
@@ -369,17 +370,17 @@ class playGame extends Phaser.Scene {
         }
     }
 
-    posBarriere(nextPlatformWidth) {
+    posBarriere(nextPlatformWidth, nextPlatformHeight) {
         //if (nextPlatformWidth > 2000) {
         var barriere1 = 200;
         var barriereWidth = Phaser.Math.Between(nextPlatformWidth / 4, nextPlatformWidth / 3);
-        this.addBarriere(barriereWidth, game.config.width + barriere1);
+        this.addBarriere(barriereWidth, game.config.width + barriere1, nextPlatformHeight - 80);
         // }
     }
 
-
     fall(player, poubelle) {
-        if (!fall && this.player.y > 425) {
+        if (!fall) {
+            console.log("salut");
             fall = true;
             poubelle.setVelocityX(-800);
             player.anims.play('fall');
@@ -387,10 +388,9 @@ class playGame extends Phaser.Scene {
         }
     }
 
-    posPoubelle(nextPlatformWidth) {
+    posPoubelle(nextPlatformWidth, nextPlatformHeight) {
         var poubelle1 = Phaser.Math.Between(150, nextPlatformWidth - 500);
         var poubelle2 = Phaser.Math.Between(150, nextPlatformWidth);
-        console.log(poubelle1, poubelle2);
         if (poubelle1 <= poubelle2) {
             if (poubelle2 - poubelle1 < 400 && nextPlatformWidth > poubelle1 + 400) {
                 poubelle2 = poubelle1 + Phaser.Math.Between(400, nextPlatformWidth - poubelle1);
@@ -400,9 +400,8 @@ class playGame extends Phaser.Scene {
                 poubelle1 = poubelle2 + Phaser.Math.Between(400, nextPlatformWidth - poubelle2);
             }
         }
-        console.log(poubelle1, poubelle2);
-        this.addPoubelle(game.config.width + poubelle1);
-        this.addPoubelle(game.config.width + poubelle2);
+        this.addPoubelle(game.config.width + poubelle1, nextPlatformHeight - 80);
+        this.addPoubelle(game.config.width + poubelle2, nextPlatformHeight - 80);
     }
 
 
