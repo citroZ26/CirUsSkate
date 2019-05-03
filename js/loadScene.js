@@ -37,6 +37,7 @@ class loadScene extends Phaser.Scene{
         this.load.audio('jump', './assets/audio/jump.ogg');
         this.load.audio('gameover', './assets/audio/gameover.ogg');
         this.load.audio('theme', './assets/audio/theme.ogg');
+        this.load.audio('coin', '.assets/audio/coinSound.ogg');
 
         this.load.on('progress', function (value) {
             progressBar.clear();

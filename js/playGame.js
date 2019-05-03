@@ -20,7 +20,7 @@ let gameOptions = {
     platformHeighScale: 100,
 
     // hauteur maximale et minimale de la plate-forme, en tant que rapport de hauteur d'écran
-    platformVerticalLimit: [0.7, 0.8],
+    platformVerticalLimit: [0.6, 0.8],
 
     // % of probability a coin appears on the platform
     coinPercent: 75,
@@ -38,24 +38,21 @@ var jumpMusic;
 var poubelle;
 var gameoverMusic;
 var buttonRestart;
-var aKey;
 var keySpace;
 var background;
-var jumpSprite;
 var animation;
 var button;
 var player;
-var playerStart;
 var clock;
 var spark;
 var fall = false;
-var timerFall;
 var scoreText;
-var timedEvent;
 var isJumped = 0;
 var skate;
 var xText;
 var graphics;
+var theme;
+var coinSound;
 
 
 
@@ -77,8 +74,9 @@ class playGame extends Phaser.Scene {
 
         //audio
         jumpMusic = this.sound.add('jump');
-        gameoverMusic = this.sound.add('jump');
-        var theme = this.sound.add('theme');
+        gameoverMusic = this.sound.add('gameover');
+        theme = this.sound.add('theme');
+        coinSound = this.sound.add('coinSound');
         theme.play();
 
         //temps
@@ -152,6 +150,9 @@ class playGame extends Phaser.Scene {
 
         var frameFall = this.anims.generateFrameNames('fall');
         this.anims.create({key: 'fall', frames: frameFall, frameRate: 18});
+
+        var frameSpark = this.anims.generateFrameNames('spark');
+        this.anims.create({key: 'spark', frames: frameSpark, frameRate: 10, repeat: -1});
         
         var rect = new Phaser.Geom.Rectangle(game.config.width / 2 - 100, 0, 200, 75);
         graphics = this.add.graphics({ fillStyle: { color: 0x666666, alpha: 0.8 } });
@@ -190,6 +191,7 @@ class playGame extends Phaser.Scene {
         // setting collisions between the player and the coin group
         this.physics.add.overlap(this.player, this.coinGroup, function(player, coin){
             ++gameOptions.nbrCoin;
+            coinSound.play();
             this.tweens.add({
             targets: coin,
             y: coin.y - 100,
@@ -359,6 +361,7 @@ class playGame extends Phaser.Scene {
     jump() {
         this.player.body.velocity.y = -450;
         isJumped++;
+        jumpMusic.play();
     }
 
     checkDoubleJump() {
@@ -416,6 +419,8 @@ class playGame extends Phaser.Scene {
         skate.visible = false;
         xText.visible = false;
         graphics.visible = false;
+        theme.stop();
+        gameoverMusic.play();
         this.scene.pause("PlayGame");
     }
 
