@@ -34,6 +34,7 @@ class loadScene extends Phaser.Scene{
         this.load.image('buttonRestart', './assets/images/restartButton.png');
         this.load.image("poubelle", "./assets/images/poubelle.png");
         this.load.image("barriere", "./assets/images/barriere.png");
+
         this.load.audio('jump', './assets/audio/jump.ogg');
         this.load.audio('gameover', './assets/audio/gameover.ogg');
         this.load.audio('theme', './assets/audio/theme.ogg');

@@ -78,7 +78,7 @@ class playGame extends Phaser.Scene {
         jumpMusic = this.sound.add('jump');
         gameoverMusic = this.sound.add('gameover');
         theme = this.sound.add('theme');
-        coinSound = this.sound.add('coinSound');
+        coinSound = this.sound.add('coin');
         congratulation = this.sound.add('congratulation');
         theme.play();
 
@@ -426,8 +426,9 @@ class playGame extends Phaser.Scene {
         theme.stop();
         if(gameOptions.nbrCoin > bestScore) {
             congratulation.play();
+        } else {
+            gameoverMusic.play();
         }
-        gameoverMusic.play();
         this.scene.pause("PlayGame");
     }
 
