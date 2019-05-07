@@ -20,7 +20,7 @@ let gameOptions = {
     platformHeighScale: 100,
 
     // hauteur maximale et minimale de la plate-forme, en tant que rapport de hauteur d'écran
-    platformVerticalLimit: [0.6, 0.8],
+    platformVerticalLimit: [0.75, 0.95],
 
     // % of probability a coin appears on the platform
     coinPercent: 75,
