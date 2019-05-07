@@ -52,6 +52,8 @@ var xText;
 var graphics;
 var theme;
 var coinSound;
+var congratulation;
+var bestScore = 2;
 
 
 
@@ -75,7 +77,8 @@ class playGame extends Phaser.Scene {
         jumpMusic = this.sound.add('jump');
         gameoverMusic = this.sound.add('gameover');
         theme = this.sound.add('theme');
-        coinSound = this.sound.add('coinSound');
+        coinSound = this.sound.add('coin');
+        congratulation = this.sound.add('congratulation');
         theme.play();
 
         //temps
@@ -159,6 +162,7 @@ class playGame extends Phaser.Scene {
         var rect = new Phaser.Geom.Rectangle(game.config.width / 2 - 100, 0, 200, 75);
         graphics = this.add.graphics({ fillStyle: { color: 0x666666, alpha: 0.8 } });
         graphics.fillRectShape(rect);
+
         //score en jeux
         xText = this.add.text(game.config.width / 2 - 15, 20, 'x', {
             font: '50px',
@@ -437,7 +441,11 @@ class playGame extends Phaser.Scene {
         xText.visible = false;
         graphics.visible = false;
         theme.stop();
-        gameoverMusic.play();
+        if(gameOptions.nbrCoin > bestScore) {
+            congratulation.play();
+        } else {
+            gameoverMusic.play();
+        }
         this.scene.pause("PlayGame");
     }
 
