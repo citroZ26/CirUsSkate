@@ -11,6 +11,7 @@ class loadScene extends Phaser.Scene{
         this.load.multiatlas('fall', './assets/animations/fall.json', './assets/animations');
         this.load.multiatlas('wait', './assets/animations/wait.json', './assets/animations');
         this.load.multiatlas('spark', './assets/animations/spark.json', './assets/animations');
+        this.load.multiatlas('incendie', './assets/animations/incendie.json', './assets/animations');
         this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
 
         

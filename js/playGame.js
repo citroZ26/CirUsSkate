@@ -4,17 +4,17 @@ let gameOptions = {
 
     // spawn range, à quelle distance doit être la plate-forme la plus à droite du bord droit
     // before next platform spawns, in pixels
-    spawnRange: [300, 900],
+    spawnRange: [300, 300],
 
     // plage de spawn, how far should be the rightmost platform from the right edge
     // avant que la prochaine plateform apparaisse, en pixels
     platformStartSpeed: 350,
 
     // largeur de la plate-forme, en pixels
-    platformSizeRange: [688, 1500],
+    platformSizeRange: [688, 688],
 
     // une plage haute entre la plateforme la plus à droite et la prochaine plateforme à engendrer
-    platformHeightRange: [-5, 5],
+    platformHeightRange: [-4, 4],
 
     // a scale to be multiplied by platformHeightRange
     platformHeighScale: 100,
@@ -35,7 +35,6 @@ let gameOptions = {
 }
 
 var jumpMusic;
-var poubelle;
 var gameoverMusic;
 var buttonRestart;
 var keySpace;
@@ -105,6 +104,9 @@ class playGame extends Phaser.Scene {
 
         // groupe barrieres
         this.barriereGroup = this.add.group({});
+        
+        // groupe incendie
+        this.incendieGroup = this.add.group({});
 
         // group with all active coins.
         this.coinGroup = this.add.group({
@@ -188,10 +190,11 @@ class playGame extends Phaser.Scene {
         this.physics.add.collider(this.platformGroup, this.barriereGroup);
         this.physics.add.collider(this.player, this.barriereGroup, this.fall2, null, this);
         this.physics.add.collider(this.player, this.poubelleGroup, this.fall, null, this);
+        this.physics.add.collider(this.player, this.incendieGroup, this.fall, null, this);
         // setting collisions between the player and the coin group
         this.physics.add.overlap(this.player, this.coinGroup, function(player, coin){
             ++gameOptions.nbrCoin;
-            coinSound.play();
+            //coinSound.play();
             this.tweens.add({
             targets: coin,
             y: coin.y - 100,
@@ -213,7 +216,7 @@ class playGame extends Phaser.Scene {
                 this.checkDoubleJump();
             }
         });
-
+        
         //plein écran
         button = this.add.image(800 - 16, 16, 'fullscreen').setOrigin(-7, 0).setInteractive({useHandCursor: true});
         button.visible = true;
@@ -232,6 +235,7 @@ class playGame extends Phaser.Scene {
         poubelle.setVelocityX((gameOptions.platformStartSpeed * -1));
        // poubelle.setVelocityY(900);
         poubelle.setScale(0.3);
+        poubelle.setImmovable(true);
         this.poubelleGroup.add(poubelle);
     }
 
@@ -244,11 +248,24 @@ class playGame extends Phaser.Scene {
         barriere.setImmovable(true);
         this.barriereGroup.add(barriere);
     }
+    
+    addIncendie(posX, posY) {
+        let incendie;
+        incendie = this.physics.add.sprite(posX, posY-20, 'incendie-0');
+        incendie.setVelocityX((gameOptions.platformStartSpeed * -1));
+        incendie.setSize(80,220, false).setOffset(70, 50);
+        incendie.setScale(0.65);
+        var frameIncendie = this.anims.generateFrameNames('incendie');
+        this.anims.create({key: 'incendie', frames: frameIncendie, frameRate: 9, repeat: -1});
+        incendie.anims.play('incendie');
+        this.incendieGroup.add(incendie);
+    }
 
     addPlatform(platformWidth, posX, posY) {
         this.addedPlatforms++;
         gameOptions.platformStartSpeed += 2;
         let platform;
+        console.log(this.platformPool.getLength());
         if (this.platformPool.getLength()) {
             platform = this.platformPool.getFirst();
             platform.x = posX;
@@ -256,7 +273,7 @@ class playGame extends Phaser.Scene {
             platform.active = true;
             platform.visible = true;
             this.platformPool.remove(platform);
-            let newRatio = platformWidth / platform.displayWidth;
+            //let newRatio = platformWidth / platform.displayWidth;
             platform.displayWidth = platformWidth;
             platform.tileScaleX = 1 / platform.scaleX;
         } else {
@@ -341,7 +358,7 @@ class playGame extends Phaser.Scene {
             let nextPlatformHeight = Phaser.Math.Clamp(nextPlatformGap, minPlatformHeight, maxPlatformHeight);
             this.addPlatform(nextPlatformWidth, game.config.width + nextPlatformWidth / 2, nextPlatformHeight);
             this.posPoubelle(nextPlatformWidth, nextPlatformHeight);
-            this.posBarriere(nextPlatformWidth, nextPlatformHeight);
+            //this.posBarriere(nextPlatformWidth, nextPlatformHeight);
         }
 
         this.poubelleGroup.getChildren().forEach(function (poubelle) {
@@ -392,7 +409,7 @@ class playGame extends Phaser.Scene {
     }
 
     posPoubelle(nextPlatformWidth, nextPlatformHeight) {
-        var poubelle1 = Phaser.Math.Between(150, nextPlatformWidth - 500);
+        var poubelle1 = Phaser.Math.Between(150, nextPlatformWidth);
         var poubelle2 = Phaser.Math.Between(150, nextPlatformWidth);
         if (poubelle1 <= poubelle2) {
             if (poubelle2 - poubelle1 < 400 && nextPlatformWidth > poubelle1 + 400) {
@@ -404,7 +421,7 @@ class playGame extends Phaser.Scene {
             }
         }
         this.addPoubelle(game.config.width + poubelle1, nextPlatformHeight - 80);
-        this.addPoubelle(game.config.width + poubelle2, nextPlatformHeight - 80);
+        this.addIncendie(game.config.width + poubelle2, nextPlatformHeight - 80);
     }
 
 
