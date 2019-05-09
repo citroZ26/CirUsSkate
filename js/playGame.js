@@ -26,7 +26,7 @@ let gameOptions = {
     coinPercent: 75,
 
     playerStartPosition: 200,
-    playerGravity: 1100,
+    playerGravity: 900,
     jumpForce: 900,
     jumps: 1,
     counter: 0,

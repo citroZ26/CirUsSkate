@@ -3,7 +3,7 @@ var score = 0;
 var bestScore = 2;
 class pauseScene extends Phaser.Scene{
     constructor(){
-        super("pause");
+        super("pauseScene");
     }
     init(data) {
         if(data>0) {

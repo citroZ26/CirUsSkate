@@ -1,9 +1,8 @@
 let infini;
-let niveau;
 
 class MainMenu extends Phaser.Scene {
     constructor() {
-        super﻿({key: "MainMenu"});
+        super({key: "MainMenu"});
     }
 
     create() {

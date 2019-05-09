@@ -7,6 +7,8 @@ window.onload = function() {
         height: 750,
         scene: [
             loadScene,
+            Niveau,
+            niveauPause,
             MainMenu,
             TitleScene,
             playGame,
