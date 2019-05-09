@@ -42,6 +42,11 @@ class loadScene extends Phaser.Scene{
         this.load.audio('coin', './assets/audio/coinSound.ogg');
         this.load.audio('congratulation', './assets/audio/congratulation.ogg');
 
+        //MainMenu load
+        this.load.image('eskate', './assets/images/eskate.png');
+        this.load.multiatlas('fire', './assets/animations/fire.json', './assets/animations');
+
+
         this.load.on('progress', function (value) {
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
@@ -57,9 +62,10 @@ class loadScene extends Phaser.Scene{
             progressBox.destroy();
             loadingText.destroy();
             percentText.destroy();
-            //console.log(this.scene);
+            console.log(this.scene);
             //this.scene.scene.start('TitleScene');
-            this.scene.scene.start('PlayGame');
+            //var MainMenu = new Phaser.Scene('Demo');
+            this.scene.scene.start('MainMenu');
         });
 
         var progressBar = this.add.graphics();

@@ -26,8 +26,8 @@ let gameOptions = {
     coinPercent: 75,
 
     playerStartPosition: 200,
-    playerGravity: 900,
-    jumpForce: 500,
+    playerGravity: 1100,
+    jumpForce: 900,
     jumps: 1,
     counter: 0,
     bestScore: 37,
@@ -65,6 +65,9 @@ class playGame extends Phaser.Scene {
     }
 
     create() {
+
+        console.log(this.scene);
+
         gameOptions.counter = 0; // Score à 0
         gameOptions.nbrCoin = 0;
         gameOptions.platformStartSpeed = 500;
@@ -192,7 +195,7 @@ class playGame extends Phaser.Scene {
         }, null, this);
         this.physics.add.collider(this.platformGroup, this.poubelleGroup);
         this.physics.add.collider(this.platformGroup, this.barriereGroup);
-        this.physics.add.collider(this.player, this.barriereGroup, this.fall2, null, this);
+        //this.physics.add.collider(this.player, this.barriereGroup, this.fall2, null, this);
         this.physics.add.collider(this.player, this.poubelleGroup, this.fall, null, this);
         this.physics.add.collider(this.player, this.incendieGroup, this.fall, null, this);
         // setting collisions between the player and the coin group
@@ -257,7 +260,7 @@ class playGame extends Phaser.Scene {
         let incendie;
         incendie = this.physics.add.sprite(posX, posY-20, 'incendie-0');
         incendie.setVelocityX((gameOptions.platformStartSpeed * -1));
-        incendie.setSize(80,220, false).setOffset(70, 50);
+        incendie.setSize(80,220, false).setOffset(90, 100);
         incendie.setScale(0.65);
         var frameIncendie = this.anims.generateFrameNames('incendie');
         this.anims.create({key: 'incendie', frames: frameIncendie, frameRate: 9, repeat: -1});

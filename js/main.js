@@ -1,19 +1,18 @@
 let game;
 
 window.onload = function() {
-
-    // object containing configuration options
     let gameConfig = {
         type: Phaser.AUTO,
         width: 1334,
         height: 750,
         scene: [
             loadScene,
+            MainMenu,
             TitleScene,
             playGame,
             pauseScene            
         ],
-        backgroundColor: 0xFFFFFF,
+        backgroundColor: 0x4682B4,
         
         plugins: {
             global: [{
@@ -27,7 +26,7 @@ window.onload = function() {
         physics: {
             default: "arcade",
             arcade: {
-                debug: true,
+                //debug: true,
                 //gravity: { y: 900 }
             }
         }
