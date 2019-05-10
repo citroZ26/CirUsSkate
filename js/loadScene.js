@@ -79,8 +79,8 @@ class loadScene extends Phaser.Scene{
             console.log(this.scene);
             //this.scene.scene.start('TitleScene');
             //var MainMenu = new Phaser.Scene('Demo');
-            //this.scene.scene.start('MainMenu');
-            this.scene.scene.start('Niveau' , 2);
+            this.scene.scene.start('MainMenu');
+            //this.scene.scene.start('Niveau' , 2);
         });
 
         var progressBar = this.add.graphics();

@@ -48,11 +48,11 @@ class MainMenu extends Phaser.Scene {
         this.fireGroup.add(fire2);
 
         infini.on("pointerdown", function() {
-            this.scene.scene.start('playGame');
+            this.scene.scene.start('Niveau' , 2);
         });
 
         title.on("pointerdown", function() {
-            this.scene.scene.start('playGame');
+            this.scene.scene.start('Niveau' , 2);
         });
 
 

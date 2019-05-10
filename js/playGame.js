@@ -397,14 +397,6 @@ class playGame extends Phaser.Scene {
         }
     }
 
-    posBarriere(nextPlatformWidth, nextPlatformHeight) {
-        //if (nextPlatformWidth > 2000) {
-        var barriere1 = 200;
-        var barriereWidth = Phaser.Math.Between(nextPlatformWidth / 4, nextPlatformWidth / 3);
-        this.addBarriere(barriereWidth, game.config.width + barriere1, nextPlatformHeight - 80);
-        // }
-    }
-
     fall(player, poubelle) {
         if (!fall) {
             console.log("salut");
