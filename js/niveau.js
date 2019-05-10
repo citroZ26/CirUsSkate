@@ -124,17 +124,6 @@ class Niveau extends Phaser.Scene {
                 this.checkDoubleJump();
             }
         });
-        
-        //plein écran
-        button = this.add.image(800 - 16, 16, 'fullscreen').setOrigin(-7, 0).setInteractive({useHandCursor: true});
-        button.visible = true;
-        button.on('pointerup', function () {
-            if (this.scale.isFullscreen) {
-                this.scale.stopFullscreen();
-            } else {
-                this.scale.startFullscreen();
-            }
-        }, this);
     }
 
 
@@ -171,12 +160,15 @@ class Niveau extends Phaser.Scene {
         this.player.anims.play('wait');
         this.blue = this.add.sprite(this.player.x - 300, 400,'bluefire-0');
         this.blue.setScale(5);
+        this.blue.setDepth(2);
         this.blue.anims.play('blueshot');
         this.red = this.add.sprite(this.player.x, 200,'redfire-0');
         this.red.setScale(5);
+        this.red.setDepth(2);
         this.red.anims.play('redshot');
         this.yellow = this.add.sprite(this.player.x + 400, 300,'yellowfire-0');
         this.yellow.setScale(5);
+        this.yellow.setDepth(2);
         this.yellow.anims.play('yellowshot');
         this.time.addEvent({delay: 1500, callback: this.gameOverEnd, callbackScope: this});
     }
@@ -187,6 +179,7 @@ class Niveau extends Phaser.Scene {
     gameOverEnd() {
         this.scene.launch("niveauPause", nbrNiveau);
         var cam = this.cameras.main;
+        congratulation.play();
         this.player.destroy();
         this.scene.pause("Niveau");
     }
@@ -195,6 +188,8 @@ class Niveau extends Phaser.Scene {
         var cam = this.cameras.main;
         this.player.destroy();
         this.scene.pause("Niveau");
+        theme.stop();
+        gameoverMusic.play();
     }
 
 }

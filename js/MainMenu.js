@@ -4,9 +4,7 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
-        if (this.scale.isFullscreen) {
-            this.scale.stopFullscreen();
-        } else {
+        if (!this.scale.isFullscreen) {
             this.scale.startFullscreen();
         }
         var title = this.add.image(0,0,"eskate").setScale(0.4);
@@ -59,7 +57,7 @@ class MainMenu extends Phaser.Scene {
             alpha: 1
         });
         infini.setStroke('black', 2);
-        Phaser.Display.Align.In.BottomLeft(level1, this.add.zone(0,game.config.height));
+        Phaser.Display.Align.In.BottomLeft(level1, this.add.zone(75,game.config.height-150));
         level1.on("pointerdown", function() {
             this.scene.scene.start('Niveau' , 2);
         });
@@ -75,7 +73,7 @@ class MainMenu extends Phaser.Scene {
             alpha: 1
         });
         infini.setStroke('black', 2);
-        Phaser.Display.Align.In.BottomCenter(level2, this.add.zone(game.config.width/2,game.config.height));
+        Phaser.Display.Align.In.BottomCenter(level2, this.add.zone(game.config.width/2,game.config.height - 150));
         level2.on("pointerdown", function() {
             this.scene.scene.start('Niveau' , 3);
         });
@@ -91,7 +89,7 @@ class MainMenu extends Phaser.Scene {
             alpha: 1
         });
         infini.setStroke('black', 2);
-        Phaser.Display.Align.In.BottomRight(level3, this.add.zone(game.config.width,game.config.height));
+        Phaser.Display.Align.In.BottomRight(level3, this.add.zone(game.config.width - 75,game.config.height - 150));
         level3.on("pointerdown", function() {
             this.scene.scene.start('Niveau' , 4);
         });
