@@ -1,5 +1,3 @@
-let infini;
-
 class MainMenu extends Phaser.Scene {
     constructor() {
         super({key: "MainMenu"});
@@ -12,14 +10,6 @@ class MainMenu extends Phaser.Scene {
             this.scale.startFullscreen();
         }
         var title = this.add.image(0,0,"eskate").setScale(0.4);
-        /*var title = this.add.text(game.config.width/2 - 270, game.config.height/2 - 180, 'E-SKATE GAME', {
-            font: '80px',
-            fill: 'yellow',
-            color: 'yellow',
-            align: 'center',
-            alpha: 1
-        });
-        title.setStroke("red", 8);*/
         Phaser.Display.Align.In.Center(title, this.add.zone(game.config.width/2, game.config.height/2 - 100, game.config.width, game.config.height));
 
         var infini = this.add.text(game.config.width/2 - 170, game.config.height/2, 'Click here to begin...', {
@@ -59,7 +49,5 @@ class MainMenu extends Phaser.Scene {
         title.on("pointerdown", function() {
             this.scene.scene.start('Niveau' , 2);
         });
-
-
     }
 };

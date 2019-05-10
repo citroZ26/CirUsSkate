@@ -143,6 +143,9 @@ class Niveau extends Phaser.Scene {
         if (this.player.y > game.config.height) {
             this.gameOverLoose();
             this.player.destroy();
+            theme.stop();
+            gameoverMusic.play();
+
         }  
     }
     
