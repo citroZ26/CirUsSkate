@@ -6,6 +6,11 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
+        if (this.scale.isFullscreen) {
+            this.scale.stopFullscreen();
+        } else {
+            this.scale.startFullscreen();
+        }
         var title = this.add.image(0,0,"eskate").setScale(0.4);
         /*var title = this.add.text(game.config.width/2 - 270, game.config.height/2 - 180, 'E-SKATE GAME', {
             font: '80px',
